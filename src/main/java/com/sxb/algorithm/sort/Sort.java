@@ -1,5 +1,7 @@
 package com.sxb.algorithm.sort;
 
+import com.sxb.algorithm.util.DataChecker;
+
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
@@ -80,6 +82,7 @@ public abstract class Sort implements Comparable<Sort> {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
+        DataChecker.checkArray(array);
         sb.append("【" + getClass().getSimpleName() + "】" + "\n");
         if(array.length < 100){
             sb.append("数组=").append(Arrays.toString(array) + "\n");
