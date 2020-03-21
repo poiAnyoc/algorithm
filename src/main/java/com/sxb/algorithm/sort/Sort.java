@@ -1,7 +1,5 @@
 package com.sxb.algorithm.sort;
 
-import com.sxb.algorithm.util.DataChecker;
-
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
@@ -12,14 +10,14 @@ import java.util.Arrays;
  * @date: 2020/3/19 23:00
  * @version: v1.0
  */
-public abstract class Sort implements Comparable<Sort> {
-    protected Integer[] array;
+public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E>> {
+    protected E[] array;
     private int compareCount;
     private int swapCount;
     private long time;
     private DecimalFormat fmt = new DecimalFormat("#.00");
 
-    public void sort(Integer[] array){
+    public void sort(E[] array){
         this.array = array;
 
         long begin = System.currentTimeMillis();
@@ -28,7 +26,7 @@ public abstract class Sort implements Comparable<Sort> {
         time = end - begin;
     }
 
-    public int compareTo(Sort o){
+    public int compareTo(Sort<E> o){
         int r = (int) (time - o.time);
         if(r != 0){
             return r;
@@ -53,17 +51,17 @@ public abstract class Sort implements Comparable<Sort> {
      */
     protected int compare(int i, int j){
         compareCount++;
-        return array[i] - array[j];
+        return array[i].compareTo(array[j]);
     }
 
-    protected int compareElements(Integer v1, Integer v2){
+    protected int compare(E v1, E v2){
         compareCount++;
-        return v1 - v2;
+        return v1.compareTo(v2);
     }
 
     protected void swap(int i, int j){
         swapCount++;
-        int temp = array[i];
+        E temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
@@ -81,16 +79,38 @@ public abstract class Sort implements Comparable<Sort> {
 
     @Override
     public String toString() {
+        String stableStr = "稳定性：" + isStable() + " ";
+        String compareCountStr = "比较次数=" + compareCount + "  ";
+        String swapCountStr = "交换次数=" + swapCount + "  ";
+        String timeStr = "耗时=" + (time / 1000) + "s(" + time + "ms)" + "\n";
+
         final StringBuilder sb = new StringBuilder();
-        DataChecker.checkArray(array);
         sb.append("【" + getClass().getSimpleName() + "】" + "\n");
         if(array.length < 100){
             sb.append("数组=").append(Arrays.toString(array) + "\n");
         }
-        sb.append("比较次数=").append(compareCount + "  ");
-        sb.append("交换次数=").append(swapCount + "   ");
-        sb.append("耗时=").append((time / 1000) + "s(" + time + "ms)" + "\n");
+        sb.append(stableStr);
+        sb.append(compareCountStr);
+        sb.append(swapCountStr);
+        sb.append(timeStr);
         sb.append("- - - - - - - - - - - - - - - - - - ");
         return sb.toString();
+    }
+
+    private boolean isStable(){
+        User[] users = new User[20];
+        for (int i = 0; i < users.length; i++) {
+            users[i] = new User(i * 10, 10, "张三");
+        }
+
+        sort((E[]) users);
+        for (int i = 1; i < users.length; i++) {
+            int score = users[i].getScore();
+            int preScore = users[i - 1].getScore();
+            if(score != preScore + 10){
+                return false;
+            }
+        }
+        return true;
     }
 }

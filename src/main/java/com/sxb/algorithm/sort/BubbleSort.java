@@ -8,7 +8,7 @@ package com.sxb.algorithm.sort;
  * @date: 2020/3/17 0:34
  * @version: v1.0
  */
-public class BubbleSort extends Sort {
+public class BubbleSort<E extends Comparable<E>> extends Sort<E> {
     public static void main(String[] args) {
         int[] array = new int[]{12, 7, 9, 4, 1, 8, 213, 23};
 

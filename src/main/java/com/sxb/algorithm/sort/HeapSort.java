@@ -7,7 +7,7 @@ package com.sxb.algorithm.sort;
  * @date: 2020/3/19 22:42
  * @version: v1.0
  */
-public class HeapSort extends Sort {
+public class HeapSort<E extends Comparable<E>> extends Sort<E> {
     private int heapSize;
 
     @Override
@@ -28,23 +28,23 @@ public class HeapSort extends Sort {
     }
 
     private void siftDown(int index) {
-        Integer element = array[index];
+        E element = array[index];
 
         int half = heapSize >> 1;
         // index必须是非叶子结点
         while(index < half){
             // 默认是左边和父节点比较
             int childIndex = (index << 1) + 1;
-            Integer child = array[childIndex];
+            E child = array[childIndex];
 
             int rightIndex = childIndex + 1;
             // 右子节点比左子节点大
-            if(rightIndex < heapSize && compareElements(array[rightIndex], child) > 0){
+            if(rightIndex < heapSize && compare(array[rightIndex], child) > 0){
                 child = array[childIndex = rightIndex];
             }
 
             // 大于等于子节点
-            if(compareElements(element, child) >= 0){
+            if(compare(element, child) >= 0){
                 break;
             }
             array[index] = child;
