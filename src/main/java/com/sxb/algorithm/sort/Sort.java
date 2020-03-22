@@ -22,8 +22,7 @@ public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E
 
         long begin = System.currentTimeMillis();
         sort();
-        long end = System.currentTimeMillis();
-        time = end - begin;
+        time = System.currentTimeMillis() - begin;
     }
 
     public int compareTo(Sort<E> o){
@@ -79,21 +78,21 @@ public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E
 
     @Override
     public String toString() {
-        String stableStr = "稳定性：" + isStable() + " ";
-        String compareCountStr = "比较次数=" + compareCount + "  ";
-        String swapCountStr = "交换次数=" + swapCount + "  ";
-        String timeStr = "耗时=" + (time / 1000) + "s(" + time + "ms)" + "\n";
+        String stableStr = "稳定性：" + isStable() + "\t";
+        String compareCountStr = "比较次数：" + numberString(compareCount) + "\t";
+        String swapCountStr = "交换次数：" + numberString(swapCount) + "\t";
+        String timeStr = "耗时：" + (time / 1000) + "s(" + time + "ms)" + "\t";
 
         final StringBuilder sb = new StringBuilder();
         sb.append("【" + getClass().getSimpleName() + "】" + "\n");
-        if(array.length < 100){
-            sb.append("数组=").append(Arrays.toString(array) + "\n");
-        }
+//        if(array.length < 100){
+//            sb.append("数组=").append(Arrays.toString(array) + "\n");
+//        }
         sb.append(stableStr);
+        sb.append(timeStr);
         sb.append(compareCountStr);
         sb.append(swapCountStr);
-        sb.append(timeStr);
-        sb.append("- - - - - - - - - - - - - - - - - - ");
+        sb.append("\n- - - - - - - - - - - - - - - - - - ");
         return sb.toString();
     }
 

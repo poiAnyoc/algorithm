@@ -13,14 +13,15 @@ import java.util.Arrays;
  */
 public class T {
     public static void main(String[] args) {
-        Integer[] array = ArrayKit.randomArray(10, 19);
+        Integer[] array = ArrayKit.randomArray(10000, 199);
 //		new BubbleSort().sort(array);
 
         // 指定泛型 Integer
         testSort(array,
                 new BubbleSort(),
                 new SelectionSort(),
-                new HeapSort()
+                new HeapSort(),
+                new InsertionSort()
         );
     }
 
