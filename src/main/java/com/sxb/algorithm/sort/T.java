@@ -21,7 +21,8 @@ public class T {
                 new BubbleSort(),
                 new SelectionSort(),
                 new HeapSort(),
-                new InsertionSort()
+                new InsertionSort(),
+                new MergeSort()
         );
     }
 
