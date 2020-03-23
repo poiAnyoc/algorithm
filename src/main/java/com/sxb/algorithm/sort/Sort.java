@@ -81,7 +81,7 @@ public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E
         String stableStr = "稳定性：" + isStable() + "\t";
         String compareCountStr = "比较次数：" + numberString(compareCount) + "\t";
         String swapCountStr = "交换次数：" + numberString(swapCount) + "\t";
-        String timeStr = "耗时：" + (time / 1000) + "s(" + time + "ms)" + "\t";
+        String timeStr = "耗时：" + (time / 1000.0) + "s(" + time + "ms)" + "\t";
 
         final StringBuilder sb = new StringBuilder();
         sb.append("【" + getClass().getSimpleName() + "】" + "\n");

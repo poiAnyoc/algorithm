@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class T {
     public static void main(String[] args) {
-        Integer[] array = ArrayKit.randomArray(10000, 199);
+        Integer[] array = ArrayKit.randomArray(10000, 1999);
 //		new BubbleSort().sort(array);
 
         // 指定泛型 Integer
@@ -22,7 +22,8 @@ public class T {
                 new SelectionSort(),
                 new HeapSort(),
                 new InsertionSort(),
-                new MergeSort()
+                new MergeSort(),
+                new QuickSort()
         );
     }
 
